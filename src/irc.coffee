@@ -233,7 +233,9 @@ class IrcBot extends Adapter
       else
         console.log "msg <#{from}> #{message}"
 
-      self.receive new TextMessage(user, message)
+      textMessage = new TextMessage(user, message)
+      textMessage.isEmote = true
+      self.receive textMessage
 
     bot.addListener 'error', (message) ->
       console.error('ERROR: %s: %s', message.command, message.args.join(' '))
